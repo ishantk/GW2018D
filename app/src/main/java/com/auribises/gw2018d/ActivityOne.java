@@ -44,7 +44,7 @@ public class ActivityOne extends AppCompatActivity implements View.OnClickListen
             //int iAge = Integer.parseInt(age);
 
             // Start a new Activity
-            Intent intent = new Intent(ActivityOne.this, ActivityTwo.class);
+            //Intent intent = new Intent(ActivityOne.this, ActivityTwo.class);
 
             //1. Forward Passing - Data in putExtra
             //intent.putExtra("keyName",name);
@@ -59,7 +59,7 @@ public class ActivityOne extends AppCompatActivity implements View.OnClickListen
 
             //3. Forward Passing - Data in Object
             // We extracted data from UI
-            Person person = new Person();
+            /*Person person = new Person();
             person.name = eTxtName.getText().toString();
             try {
                 person.age = Integer.parseInt(eTxtAge.getText().toString());
@@ -69,9 +69,25 @@ public class ActivityOne extends AppCompatActivity implements View.OnClickListen
 
             }catch (Exception e){
                 Toast.makeText(this,"Please Enter Age in number",Toast.LENGTH_LONG).show();
-            }
+            }*/
 
 
+            // Start Activity For Result
+            Intent intent = new Intent(ActivityOne.this, ActivityTwo.class);
+            startActivityForResult(intent, 101);
+
+        }
+
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if(requestCode == 101 && resultCode == 201){
+            String name = data.getStringExtra("keyName");
+            int age = data.getIntExtra("keyAge", 0);
+
+            eTxtName.setText(name);
+            eTxtAge.setText(String.valueOf(age));
         }
     }
 }

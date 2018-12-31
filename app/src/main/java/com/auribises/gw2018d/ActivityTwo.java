@@ -20,7 +20,7 @@ public class ActivityTwo extends AppCompatActivity implements View.OnClickListen
         btnBack = findViewById(R.id.buttonBack);
         btnBack.setOnClickListener(this);
 
-        Intent rcv = getIntent();
+        //Intent rcv = getIntent();
         //String name = rcv.getStringExtra("keyName");
         //int age = rcv.getIntExtra("keyAge",0);
 
@@ -28,10 +28,10 @@ public class ActivityTwo extends AppCompatActivity implements View.OnClickListen
         //String name = rcvBun.getString("keyName");
         //int age = rcvBun.getInt("keyAge",0);
 
-        Person person = (Person) rcv.getSerializableExtra("keyPerson");
+        //Person person = (Person) rcv.getSerializableExtra("keyPerson");
 
-        eTxtName.setText(person.name);
-        eTxtAge.setText(String.valueOf(person.age));
+        //eTxtName.setText(person.name);
+        //eTxtAge.setText(String.valueOf(person.age));
     }
 
 
@@ -49,6 +49,19 @@ public class ActivityTwo extends AppCompatActivity implements View.OnClickListen
     @Override
     public void onClick(View v) {
         if(v == btnBack){
+
+            // We extracted data from UI
+            String name = eTxtName.getText().toString();
+            String age = eTxtAge.getText().toString();
+            int iAge = Integer.parseInt(age);
+
+            // Put Data in empty Intent
+            Intent data = new Intent(); // no source and no destination
+            data.putExtra("keyName",name);
+            data.putExtra("keyAge",iAge);
+
+            setResult(201, data);
+
             finish();
         }
     }
