@@ -16,12 +16,13 @@
         <activity android:name=".ActivityOne" />
         <activity android:name=".ActivityTwo" />
         <activity android:name=".LayoutsActivity" />
-        <activity android:name=".NewsListActivity"></activity>
+        <activity android:name=".NewsListActivity" />
         <activity android:name=".NewsActivity" />
-        <activity android:name=".ViewsActivity">
+        <activity android:name=".ViewsActivity"></activity>
+        <activity android:name=".FragmentDemoActivity">
 
         </activity>
-        <activity android:name=".FragmentDemoActivity">
+        <activity android:name=".CustomNewsListActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

@@ -17,6 +17,7 @@ public class UpperFragment extends Fragment implements View.OnClickListener{
 
 
     Button btnSubmit;
+    MyListener listener;
 
     public UpperFragment() {
         // Required empty public constructor
@@ -39,5 +40,10 @@ public class UpperFragment extends Fragment implements View.OnClickListener{
     @Override
     public void onClick(View v) {
         Toast.makeText(getContext(),"You Clicked button in Upper Fragment",Toast.LENGTH_LONG).show();
+        listener.handler(3.5f);
+    }
+
+    public void registerMyListener(MyListener listener){
+        this.listener = listener;
     }
 }

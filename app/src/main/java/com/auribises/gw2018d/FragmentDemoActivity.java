@@ -14,6 +14,8 @@ public class FragmentDemoActivity extends AppCompatActivity {
         upperFragment = new UpperFragment();
         lowerFragment = new LowerFragment();
 
+        upperFragment.registerMyListener(lowerFragment);
+
         fragmentManager = getSupportFragmentManager();
         fragmentManager.beginTransaction().add(R.id.upperFrame,upperFragment).commit();
         fragmentManager.beginTransaction().add(R.id.lowerFrame,lowerFragment).commit();
