@@ -27,12 +27,15 @@ public class NewsAdapter extends ArrayAdapter<News> {
         this.objects = objects;
     }
 
+    // getView method will be executed n number of times from 0 to n-1
+    // n is size of objects
     @NonNull
     @Override
     public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
 
         LayoutInflater inflater = LayoutInflater.from(context);
 
+        // view is pointing to list item
         View view = inflater.inflate(resource, parent, false);
 
         ImageView imageView = view.findViewById(R.id.imageView);
