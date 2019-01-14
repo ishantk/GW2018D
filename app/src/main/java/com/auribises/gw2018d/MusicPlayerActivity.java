@@ -39,10 +39,16 @@ public class MusicPlayerActivity extends AppCompatActivity implements View.OnCli
 
     @Override
     public void onClick(View v) {
+
+        Intent intent = new Intent(MusicPlayerActivity.this,MyMusicService.class);
+
         if(v == btnPlay){
+            intent.putExtra("keySong",songToPlay);
+            startService(intent);
 
         }else{
 
+            stopService(intent);
         }
     }
 }

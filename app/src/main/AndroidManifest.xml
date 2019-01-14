@@ -3,6 +3,7 @@
     package="com.auribises.gw2018d">
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
@@ -25,14 +26,23 @@
         <activity android:name=".CustomNewsListActivity" />
         <activity android:name=".PersistanceDemoActivity" />
         <activity android:name=".SplashActivity">
+
+        </activity>
+        <activity android:name=".MyMusicActivity" />
+        <activity android:name=".MusicPlayerActivity" />
+
+        <service
+            android:name=".MyMusicService"
+            android:enabled="true"
+            android:exported="true" />
+
+        <activity android:name=".JSONParserActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".MyMusicActivity" />
-        <activity android:name=".MusicPlayerActivity"></activity>
     </application>
 
 </manifest>
