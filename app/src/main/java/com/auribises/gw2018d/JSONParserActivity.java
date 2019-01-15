@@ -9,6 +9,13 @@ import android.os.Bundle;
 import android.util.Log;
 import android.widget.Toast;
 
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
+
 import org.json.JSONArray;
 import org.json.JSONObject;
 
@@ -25,6 +32,10 @@ public class JSONParserActivity extends AppCompatActivity {
     ProgressDialog progressDialog;
     ArrayList<Book> books;
 
+    // Volley API's
+    RequestQueue requestQueue;
+    StringRequest stringRequest;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -36,7 +47,10 @@ public class JSONParserActivity extends AppCompatActivity {
         if(isInternetConnected()){
             //FetchJSONData fRef = new FetchJSONData();
             //fRef.execute();
-            new FetchJSONData().execute();
+            //new FetchJSONData().execute();
+
+            fetchJSONData();
+
         }else{
             Toast.makeText(this,"Please Connect to Internet and try Again!!",Toast.LENGTH_LONG).show();
         }
@@ -49,6 +63,54 @@ public class JSONParserActivity extends AppCompatActivity {
         //boolean check = networkInfo!=null && networkInfo.isConnected();
         //return check;
         return networkInfo!=null && networkInfo.isConnected();
+    }
+
+    void fetchJSONData(){
+        requestQueue = Volley.newRequestQueue(this);
+
+        stringRequest = new StringRequest(
+                Request.Method.GET,
+                "http://www.json-generator.com/api/json/get/chQLxhBjaW?indent=2",
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+
+                        // JSON Parsing
+                        try{
+                            books = new ArrayList<>();
+                            JSONObject jsonObject = new JSONObject(response);
+                            JSONArray jsonArray = jsonObject.getJSONArray("bookstore");
+                            for(int i=0;i<jsonArray.length();i++){
+                                JSONObject jObj = jsonArray.getJSONObject(i);
+                                Book book = new Book();
+                                book.price = jObj.getString("price");
+                                book.name = jObj.getString("name");
+                                book.author = jObj.getString("author");
+                                books.add(book);
+
+                            }
+
+                            // Further display data on Custom ListView
+                            // Explore WebService to get songs as JSON
+                            // Use newsapi.org to display news from web service
+                            // Explore Piscasso to display image on imageview from some URL
+
+                        }catch (Exception e){
+                            e.printStackTrace();
+                        }
+
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        error.printStackTrace();
+                    }
+                }
+        );
+
+        // Executing Request
+        requestQueue.add(stringRequest);
     }
 
     // Background Task
