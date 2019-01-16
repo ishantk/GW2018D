@@ -19,6 +19,7 @@ public class FragmentDemoActivity extends AppCompatActivity {
         fragmentManager = getSupportFragmentManager();
         fragmentManager.beginTransaction().add(R.id.upperFrame,upperFragment).commit();
         fragmentManager.beginTransaction().add(R.id.lowerFrame,lowerFragment).commit();
+        //fragmentManager.beginTransaction().replace(R.id.lowerFrame,lowerFragment).commit();
     }
 
     @Override

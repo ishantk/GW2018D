@@ -25,7 +25,7 @@
         <activity android:name=".FragmentDemoActivity" />
         <activity android:name=".CustomNewsListActivity" />
         <activity android:name=".PersistanceDemoActivity" />
-        <activity android:name=".SplashActivity"></activity>
+        <activity android:name=".SplashActivity" />
         <activity android:name=".MyMusicActivity" />
         <activity android:name=".MusicPlayerActivity" />
 
@@ -34,10 +34,21 @@
             android:enabled="true"
             android:exported="true" />
 
-        <activity android:name=".JSONParserActivity">
+        <activity android:name=".JSONParserActivity" />
+        <activity android:name=".DialogsActivity" />
+        <activity
+            android:name=".BottomNavActivity"
+            android:label="@string/title_activity_bottom_nav"></activity>
+        <activity
+            android:name=".TabActivityDemo"
+            android:label="@string/title_activity_tab_demo"
+            android:theme="@style/AppTheme.NoActionBar">
 
         </activity>
-        <activity android:name=".DialogsActivity">
+        <activity
+            android:name=".NavigationDemoActivity"
+            android:label="@string/title_activity_navigation_demo"
+            android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
