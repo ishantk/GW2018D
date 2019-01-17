@@ -38,20 +38,20 @@
         <activity android:name=".DialogsActivity" />
         <activity
             android:name=".BottomNavActivity"
-            android:label="@string/title_activity_bottom_nav"></activity>
+            android:label="@string/title_activity_bottom_nav" />
         <activity
             android:name=".TabActivityDemo"
             android:label="@string/title_activity_tab_demo"
-            android:theme="@style/AppTheme.NoActionBar">
-
-        </activity>
+            android:theme="@style/AppTheme.NoActionBar"></activity>
         <activity
             android:name=".NavigationDemoActivity"
             android:label="@string/title_activity_navigation_demo"
             android:theme="@style/AppTheme.NoActionBar">
+
+        </activity>
+        <activity android:name=".NotificationDemoActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
