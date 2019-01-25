@@ -27,20 +27,20 @@
         android:hint="Enter Customer Name" />
 
     <EditText
-        android:id="@+id/editTextPhone"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:inputType="phone"
-        android:hint="Enter Customer Phone" />
-
-    <EditText
         android:id="@+id/editTextEmail"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
-        android:inputType="textEmailAddress"
-        android:hint="Enter Customer Email" />
+        android:hint="Enter Customer Email"
+        android:inputType="textEmailAddress" />
+
+    <EditText
+        android:id="@+id/editTextPhone"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:inputType="textPassword"
+        android:hint="Enter Customer Password" />
 
     <Button
         android:id="@+id/buttonAdd"

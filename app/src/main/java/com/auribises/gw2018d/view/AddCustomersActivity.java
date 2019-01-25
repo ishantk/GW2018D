@@ -4,6 +4,7 @@ import android.content.ContentResolver;
 import android.content.ContentValues;
 import android.database.Cursor;
 import android.net.Uri;
+import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -17,6 +18,7 @@ import com.auribises.gw2018d.model.Customer;
 import com.auribises.gw2018d.model.Util;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /*
 Ishants-Macbook-Air:~ ishantkumar$ cd /Users/ishantkumar/Library/Android/sdk
@@ -42,7 +44,25 @@ sqlite> select * from Customers;
 1|John|9898989898|john@example.com
 2|Jennie|9090909090|jennie@example.com
 3|Harry|8989898989|harry@example.com
+
+
+
+CALL_PHONE -> Permissions Required
+
+Intent intent = new Intent(Intent.ACTION_CALL)
+intent.setData(Uri.parse("tel:+91 99155 71177"));
+startActivity(intent);
+
  */
+
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QuerySnapshot;
+import com.google.firebase.firestore.DocumentSnapshot;
+
 
 public class AddCustomersActivity extends AppCompatActivity implements View.OnClickListener{
 
@@ -54,6 +74,9 @@ public class AddCustomersActivity extends AppCompatActivity implements View.OnCl
 
     ArrayList<Customer> customers;
 
+    FirebaseAuth auth;
+    FirebaseFirestore db;
+
     void initViews(){
         eTxtName = findViewById(R.id.editTextName);
         eTxtPhone = findViewById(R.id.editTextPhone);
@@ -62,6 +85,9 @@ public class AddCustomersActivity extends AppCompatActivity implements View.OnCl
         btnAdd.setOnClickListener(this);
 
         resolver = getContentResolver();
+
+        auth = FirebaseAuth.getInstance();
+        db = FirebaseFirestore.getInstance();
     }
 
     @Override
@@ -140,6 +166,59 @@ public class AddCustomersActivity extends AppCompatActivity implements View.OnCl
         eTxtEmail.setText("");
     }
 
+    void saveUserInFirebase(){
+
+        db.collection("users").document().set(customer)
+                .addOnCompleteListener(this, new OnCompleteListener<Void>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Void> task) {
+                        if(task.isSuccessful()){
+                            Toast.makeText(AddCustomersActivity.this,"User Details Saved",Toast.LENGTH_LONG).show();
+                        }
+                    }
+                });
+
+        //db.collection("users").add(customer).add...
+        //db.collection("users").document("id").delete()...;
+        /*db.collection("users").get()
+                .addOnCompleteListener(this, new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        List<DocumentSnapshot> list = task.getResult().getDocuments();
+                        //Customer cRef = list.get(0).toObject(Customer.class);
+                    }
+                });*/
+    }
+
+    void createUserInFirebase(){
+
+        auth.createUserWithEmailAndPassword(customer.email, customer.phone)
+                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+                    @Override
+                    public void onComplete(@NonNull Task<AuthResult> task) {
+                        if(task.isSuccessful()){
+                            Toast.makeText(AddCustomersActivity.this,"User Registered",Toast.LENGTH_LONG).show();
+                            saveUserInFirebase();
+                        }
+                    }
+                });
+
+    }
+
+    void signInUserFromFirebase(){
+        auth.signInWithEmailAndPassword(customer.email, customer.phone)
+                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+                    @Override
+                    public void onComplete(@NonNull Task<AuthResult> task) {
+                        if(task.isSuccessful()){
+                            Toast.makeText(AddCustomersActivity.this,"User Signed In",Toast.LENGTH_LONG).show();
+                        }
+                    }
+                });
+
+
+    }
+
     @Override
     public void onClick(View v) {
         customer = new Customer();
@@ -150,6 +229,7 @@ public class AddCustomersActivity extends AppCompatActivity implements View.OnCl
         //insertCustomerInDB();
         //fetchCustomers();
         //updateCustomer();
-        deleteCustomer();
+        //deleteCustomer();
+        createUserInFirebase();
     }
 }
