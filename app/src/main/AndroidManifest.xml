@@ -52,11 +52,7 @@
             android:label="@string/title_activity_navigation_demo"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".NotificationDemoActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
         <activity android:name=".LocationDemoActivity" />
         <!--
@@ -76,7 +72,13 @@
             android:label="@string/title_activity_maps" />
         <activity android:name=".SensorDemoActivity" />
         <activity android:name=".VoiceRecognitionDemoActivity" />
-        <activity android:name=".view.AddCustomersActivity" />
+
+        <activity android:name=".view.AddCustomersActivity" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
 
         <provider
             android:name=".db.CustomerContentProvider"

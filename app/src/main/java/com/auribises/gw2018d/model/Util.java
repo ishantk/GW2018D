@@ -9,6 +9,12 @@ public class Util {
     public static final String DB_NAME = "Customer.db";
 
     public static final String TAB_NAME = "Customers";
+
+    public static final String COL_ID = "_ID";
+    public static final String COL_NAME = "name";
+    public static final String COL_PHONE = "phone";
+    public static final String COL_EMAIL = "email";
+
     public static final String CREATE_TAB_QUERY = "create table Customers(" +
             "_ID integer primary key autoincrement," +
             "name varchar(256)," +
